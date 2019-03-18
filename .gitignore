@@ -2,10 +2,19 @@
 
 # JS
 node_modules
+npm-debug.log
 
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+# Android
+#
+.gradle
+.idea
+local.properties
+*.iml
+*.keystore
 
 ## Build generated
 build/
@@ -26,6 +35,7 @@ xcuserdata/
 *.moved-aside
 *.xcuserstate
 *.xcworkspacedata
+.watchmanconfig
 
 ## Obj-C/Swift specific
 *.hmap
@@ -64,4 +74,3 @@ fastlane/screenshots
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
-.idea/
