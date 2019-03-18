@@ -7,39 +7,36 @@
 //
 
 #import "ReactNativeVolumeController.h"
-#import "VolumeSlider.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@implementation ReactNativeVolumeController{
-    VolumeSlider* volumeView;
-}
+@implementation ReactNativeVolumeController
 
 RCT_EXPORT_MODULE()
 
-#pragma mark - Pubic API
-
-- (UIView *)view {
-    volumeView = [[VolumeSlider alloc] init];
-    return volumeView;
+- (void)setVolume:(float)volumeValue {
+    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    UISlider *volumeViewSlider = nil;
+    
+    for (UIView *view in volumeView.subviews) {
+        if ([view isKindOfClass:[UISlider class]]) {
+            volumeViewSlider = (UISlider *)view;
+            break;
+        }
+    }
+    
+    _showsRouteButton = false;
+    _showsVolumeSlider = false;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        volumeViewSlider.value = volumeValue;
+    });
 }
 
-RCT_EXPORT_VIEW_PROPERTY(minimumTrackTintColor, UIColor);
-RCT_EXPORT_VIEW_PROPERTY(maximumTrackTintColor, UIColor);
-RCT_EXPORT_VIEW_PROPERTY(thumbTintColor, UIColor);
-RCT_EXPORT_VIEW_PROPERTY(onValueChange, RCTBubblingEventBlock);
-RCT_EXPORT_VIEW_PROPERTY(thumbImage, UIImage);
-RCT_EXPORT_VIEW_PROPERTY(showsRouteButton, BOOL);
-RCT_CUSTOM_VIEW_PROPERTY(thumbSize, RCTthumbSize, VolumeSlider) {
-    NSDictionary *thumbSize = (NSDictionary *) json;
-    
-    [view setThumbWidth:[thumbSize[@"width"] floatValue]];
-    [view setThumbHeight:[thumbSize[@"height"] floatValue]];
-    
-    [view setThumb];
+RCT_EXPORT_METHOD(updateIOS:(float)value)
+{
+    [self setVolume:value];
 }
-
-
 
 @end

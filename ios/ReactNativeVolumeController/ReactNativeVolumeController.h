@@ -2,15 +2,15 @@
 //  ReactNativeVolumeController.h
 //  ReactNativeVolumeController
 //
-//  Created by Victor C Tavernari on 01/04/17.
-//  Copyright © 2017 Tavernari. All rights reserved.
+//  Created by Tyler Malone on 03/18/19
+//  Copyright © 2019 . All rights reserved.
 //
 
-#import <React/RCTViewManager.h>
-#import <Foundation/Foundation.h>
+#import <React/RCTBridgeModule.h>
 
-#import <UIKit/UIKit.h>
+@interface ReactNativeVolumeController : NSObject <RCTBridgeModule>
+@property(nonatomic) BOOL showsVolumeSlider;
+@property(nonatomic) BOOL showsRouteButton;
 
-@interface ReactNativeVolumeController : RCTViewManager
-
+- (void)setVolume:(float)volumeValue;
 @end
