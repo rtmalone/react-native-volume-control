@@ -1,4 +1,4 @@
-package com.tavernari.volumecontroller;
+package com.rtmalone.RNVolumeControl;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -14,20 +14,20 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-public class ReactNativeVolumeControllerModule extends ReactContextBaseJavaModule {
+public class RNVolumeControlModule extends ReactContextBaseJavaModule {
 
   private ReactApplicationContext context;
   private float max_volume = (float) 0.0;
   private AudioManager am;
 
-  public ReactNativeVolumeControllerModule(ReactApplicationContext reactContext) {
+  public RNVolumeControlModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.context = reactContext;
   }
 
   @Override
   public String getName() {
-    return "ReactNativeVolumeController";
+    return "VolumeControl";
   }
 
   @Override
