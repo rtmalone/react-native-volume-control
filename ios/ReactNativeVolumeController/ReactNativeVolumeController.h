@@ -5,8 +5,9 @@
 //
 
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-@interface ReactNativeVolumeController : NSObject <RCTBridgeModule>
+@interface ReactNativeVolumeController : RCTEventEmitter <RCTBridgeModule>
 
 - (void)initVolumeView;
 - (void)setVolume:(float)volumeValue;

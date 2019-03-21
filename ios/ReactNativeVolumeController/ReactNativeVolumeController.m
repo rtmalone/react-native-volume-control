@@ -14,12 +14,36 @@
 @implementation ReactNativeVolumeController {
     MPVolumeView *volumeView;
     UISlider *volumeViewSlider;
+    AVAudioSession *audioSession;
+    bool hasListeners;
+}
+
+RCT_EXPORT_MODULE()
+
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[@"RNVolumeEvent"];
 }
 
 - (instancetype)init{
     self = [super init];
     [self initVolumeView];
+    [self initAudioSessionObserver];
     return self;
+}
+
+- (void)startObserving {
+    hasListeners = YES;
+}
+
+- (void)stopObserving {
+    hasListeners = NO;
+}
+
+- (void)initAudioSessionObserver{
+    audioSession = [AVAudioSession sharedInstance];
+    [audioSession setActive:YES error:nil];
+    [audioSession addObserver:self forKeyPath:@"outputVolume" options:0 context:nil];
 }
 
 
@@ -37,13 +61,25 @@
 }
 
 - (void)setVolume:(float)volumeValue {
-//    volumeViewSlider = nil;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         volumeViewSlider.value = volumeValue;
     });
 }
 
-RCT_EXPORT_MODULE()
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqual:@"outputVolume"]) {
+        float newVolume = [[AVAudioSession sharedInstance] outputVolume];
+        // send JS event
+            [self sendEventWithName:@"RNVolumeEvent" body:@{@"volume": [NSNumber numberWithFloat: newVolume]}];
+        
+    }
+}
+
+- (void)dealloc {
+    [audioSession removeObserver:self forKeyPath:@"outputVolume"];
+}
+
+
 
 RCT_EXPORT_METHOD(change:(float)value)
 {
