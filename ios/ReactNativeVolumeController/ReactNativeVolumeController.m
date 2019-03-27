@@ -67,11 +67,9 @@ RCT_EXPORT_MODULE()
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqual:@"outputVolume"]) {
-        float newVolume = [[AVAudioSession sharedInstance] outputVolume];
-        // send JS event
-            [self sendEventWithName:@"RNVolumeEvent" body:@{@"volume": [NSNumber numberWithFloat: newVolume]}];
-        
+    if ([keyPath isEqual:@"outputVolume"] && hasListeners) {
+            float newVolume = [[AVAudioSession sharedInstance] outputVolume];
+            [self sendEventWithName:@"VolumeChanged" body:@{@"volume": [NSNumber numberWithFloat: newVolume]}];
     }
 }
 

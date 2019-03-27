@@ -42,9 +42,11 @@ public class ReactNativeVolumeControllerModule extends ReactContextBaseJavaModul
     }
   }
 
-  public void sendEvent(ReactContext reactContext, String eventName, @Nullable WritableMap params) {
-    this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
-  }
+  // public void sendEvent(ReactContext reactContext, String eventName, @Nullable
+  // WritableMap params) {
+  // this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName,
+  // params);
+  // }
 
   @ReactMethod
   public void getVolume(Promise promise) {
@@ -54,14 +56,6 @@ public class ReactNativeVolumeControllerModule extends ReactContextBaseJavaModul
   @ReactMethod
   public void change(float volume) {
     am.setStreamVolume(AudioManager.STREAM_MUSIC, (int) (volume * max_volume), 0);
-  }
-
-  @ReactMethod
-  public void update() {
-    float volume = am.getStreamVolume(AudioManager.STREAM_MUSIC) / max_volume;
-    WritableMap params = Arguments.createMap();
-    params.putString("volume", String.valueOf(volume));
-    sendEvent(this.context, "VolumeControllerValueUpdatedEvent", params);
   }
 
   private float getNormalizedVolume() {
