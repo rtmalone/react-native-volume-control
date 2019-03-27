@@ -40,13 +40,12 @@ RCT_EXPORT_MODULE()
     hasListeners = NO;
 }
 
-- (dispatch_queue_t)methodQueue {
-  return dispatch_get_main_queue();
++ (BOOL) requiresMainQueueSetup {
+    return YES;
 }
 
 - (void)initAudioSessionObserver{
     audioSession = [AVAudioSession sharedInstance];
-    [audioSession setActive:YES error:nil];
     [audioSession addObserver:self forKeyPath:@"outputVolume" options:0 context:nil];
 }
 
