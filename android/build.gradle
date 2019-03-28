@@ -19,7 +19,6 @@ def safeExtGet(prop, fallback) {
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', 23)
-    buildToolsVersion "23.0.1"
 
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', 16)
@@ -44,5 +43,5 @@ repositories {
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
+    implementation 'com.facebook.react:react-native:+'
 }
