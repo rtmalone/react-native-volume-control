@@ -1,4 +1,4 @@
-package com.rtmalone.RNVolumeControl;
+package com.rtmalone.volumecontrol;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -12,10 +12,11 @@ import java.util.List;
 
 public class RNVolumeControlPackage implements ReactPackage {
 
-  private RNVolumeControlModule volumeControllerModule;
+  private RNVolumeControlModule volumeControlModule;
 
   public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList(); }
+    return Collections.emptyList();
+  }
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -26,9 +27,9 @@ public class RNVolumeControlPackage implements ReactPackage {
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
 
-    volumeControllerModule = new RNVolumeControlModule(reactContext);
+    volumeControlModule = new RNVolumeControlModule(reactContext);
 
-    modules.add(volumeControllerModule);
+    modules.add(volumeControlModule);
 
     return modules;
   }

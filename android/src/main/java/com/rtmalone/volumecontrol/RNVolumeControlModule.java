@@ -1,4 +1,4 @@
-package com.rtmalone.RNVolumeControl;
+package com.rtmalone.volumecontrol;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

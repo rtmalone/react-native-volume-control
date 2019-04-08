@@ -6,12 +6,12 @@
 //  Copyright © 2019. All rights reserved.
 //
 
-#import "ReactNativeVolumeController.h"
+#import "RNVolumeControl.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@implementation ReactNativeVolumeController {
+@implementation RNVolumeControl {
     MPVolumeView *volumeView;
     UISlider *volumeViewSlider;
     AVAudioSession *audioSession;
