@@ -1,10 +1,10 @@
 {
   "name": "react-native-volume-control",
   "version": "0.1.0",
-  "description": "Volume control UI for iOS and Android",
+  "description": "Control device volume for iOS and Android",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Sorry but have not tests\""
+    "test": "echo \"No tests\""
   },
   "repository": {
     "type": "git",
@@ -15,12 +15,12 @@
     "control",
     "sound"
   ],
-  "author": "Tyler Malone <rtylermalonc@gmail.com>",
+  "author": "Tyler Malone <rtylermalone@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Tavernari/react-native-volume-controller/issues"
+    "url": "https://github.com/rtmalone/react-native-volume-control/issues"
   },
-  "homepage": "https://github.com/Tavernari/react-native-volume-controller#readme",
+  "homepage": "https://github.com/rtmalone/react-native-volume-control#readme",
   "peerDependencies": {
     "react-native": ">=0.31.0"
   },

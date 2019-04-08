@@ -1,20 +1,21 @@
-# react-native-volume-controller
-Volume Controller for iOS and Android.
+# react-native-volume-control
+
+Control device volume for iOS and Android.
 
 ## First installation step (applied for both iOS & Android)
 
-`$ npm install react-native-volume-controller --save`
+`$ npm install react-native-volume-control --save`
 
 #### 2. Automatic installation
 
-`$ react-native link react-native-volume-controller`
+`$ react-native link react-native-volume-control`
 
 #### 3. Manual installation
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-volume-controller` => `ios`
-   - add `ReactNativeVolumeController.xcodeproj` to the Libraries folder in your XCode project
-3. In XCode, in the project navigator, select your project. Add `libReactNativeVolumeController.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+2. Go to `node_modules` ➜ `react-native-volume-control` => `ios`
+   - add `ReactNativeVolumeControl.xcodeproj` to the Libraries folder in your XCode project
+3. In XCode, in the project navigator, select your project. Add `libReactNativeVolumeControl.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)
 
 ### Android
@@ -22,7 +23,7 @@ Volume Controller for iOS and Android.
 #### Manual installation
 
 1. In Android Studio open `Module Settings` and add a Gradle Project.
-2. Look for `react-native-volume-controller` android folder and link with a Gradle.
+2. Look for `react-native-volume-control` android folder and link with a Gradle.
 3. Open MyApplication.java from main app and put the ReactNativeVolumeControllerPackage
 
 ```java
@@ -30,34 +31,57 @@ Volume Controller for iOS and Android.
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new ReactNativeVolumeControllerPackage()
+          new RNVolumeControlPackage()
       );
     }
 ```
 
 ## Usage
 
-### Using component
+This component only exposes an api to update device volume and listens for `VolumeChanged` events via hardware buttons. There is no UI component included.
 
 ```javascript
+// Other imports
+...
 
-import { SliderVolumeController } from 'react-native-volume-controller';
+import VolumeControl, {
+  VolumeControlEvents
+} from "react-native-volume-controller";
+import Slider from '@react-native-community/slider';
 
-class PlayerUI extends Component {
+class App extends React.Component {
+
+    componentDidMount() {
+      // Add and store event listener
+      this.volEvent = VolumeControlEvents.addListener(
+        "VolumeChanged",
+        this.volumeEvent
+      );
+    }
+
+  // Updates Slider UI when hardware buttons change volume
+  volumeEvent = event => {
+    this.setState({ volume: event.volume });
+  };
+
+  // Updates device volume
+  sliderChange(value) {
+    VolumeControl.change(value);
+  }
+
+  componentWillUnmount() {
+    // remove event listener
+    this.volEvent.remove();
+  }
+
   render() {
     return (
-        <SliderVolumeController />
-    );
+      <Slider
+        value={this.state.volume}
+        onValueChange={this.sliderChange}
+        // Other props
+      />
+    )
   }
 }
 ```
-
-### Style props
-
-Use the props style like a [Slider](https://facebook.github.io/react-native/docs/slider.htmllike)
-
-## TODO - Need help :P
-
-- [ ] Android Listener to know when press volume button and after dispatch event to react
-- [X] Create interface to change volume with Android
-- [X] Enable Airplay button when is possible
