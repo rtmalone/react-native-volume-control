@@ -46,7 +46,7 @@ This component only exposes an api to update device volume and listens for `Volu
 
 import VolumeControl, {
   VolumeControlEvents
-} from "react-native-volume-controller";
+} from "react-native-volume-control";
 import Slider from '@react-native-community/slider';
 
 class App extends React.Component {
