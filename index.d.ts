@@ -11,5 +11,5 @@ declare namespace RNVolumeControl {
     volume: number;
   };
 
-  export class RNVCEvents extends NativeEventEmitter {}
+  export class VolumeControlEvents extends NativeEventEmitter {}
 }
