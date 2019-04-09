@@ -18,7 +18,7 @@
     bool hasListeners;
 }
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(VolumeControl)
 
 - (NSArray<NSString *> *)supportedEvents
 {
