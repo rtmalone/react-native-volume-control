@@ -46,6 +46,7 @@ RCT_EXPORT_MODULE(VolumeControl)
 
 - (void)initAudioSessionObserver{
     audioSession = [AVAudioSession sharedInstance];
+    [audioSession setActive:YES error:nil];
     [audioSession addObserver:self forKeyPath:@"outputVolume" options:0 context:nil];
 }
 
