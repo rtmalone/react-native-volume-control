@@ -5,7 +5,7 @@ export as namespace RNVolumeControl;
 
 declare namespace RNVolumeControl {
   export function change(value: number): void;
-  export function getVolume(): number;
+  export function getVolume(): Promise<number>;
 
   export type VolumeEventType = {
     volume: number;
